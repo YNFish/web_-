@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>抽奖</title>
+
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script type="text/javascript">
+	var g_Interval = 1;
+	var g_PersonCount = 200;//参加抽奖人数
+	var g_Timer;
+	var running = false;
+	function beginRndNum(trigger){
+		if(running){
+			running = false;
+			clearTimeout(g_Timer);		
+			$(trigger).val("开始");
+			$('#ResultNum').css('color','red');
+		}
+		else{
+			running = true;
+			$('#ResultNum').css('color','white');
+			$(trigger).val("停止");
+			beginTimer();
+		}
+	}
+
+	function updateRndNum(){
+		var num1 = Math.floor(Math.random()*g_PersonCount+1);
+		$('#ResultNum1').html(num1);
+
+		var num2 = Math.floor(Math.random()*g_PersonCount+1);
+		$('#ResultNum2').html(num2);
+
+		var num3 = Math.floor(Math.random()*g_PersonCount+1);
+		$('#ResultNum3').html(num3);
+
+		var num4 = Math.floor(Math.random()*g_PersonCount+1);
+		$('#ResultNum4').html(num4);
+	}
+
+	function beginTimer(){
+		g_Timer = setTimeout(beat, g_Interval);
+	}
+
+	function beat() {
+		g_Timer = setTimeout(beat, g_Interval);
+		updateRndNum();
+	}
+</script>
+
+</head>
+<body>
+
+<style type="text/css">
+body{background-color:#000;text-align:center;padding-top:50px;}
+
+#Result1,#Result2,#Result3,#Result4{border:3px solid #000000;margin:0 auto; text-align:center;width:400px;background:rgb(0, 0, 0);}
+/* #Result2{border:3px solid #f1f5f1;margin:0 auto;text-align:center;width:400px;background:rgb(6, 6, 6);}
+#Result3{border:3px solid #f1f5f1;margin:0 auto;text-align:center;width:400px;background:rgb(6, 6, 6);}
+#Result4{border:3px solid #f1f5f1;margin:0 auto;text-align:center;width:400px;background:rgb(6, 6, 6);} */
+
+#ResultNum1,#ResultNum2,#ResultNum3,#ResultNum4{font-size:200px;font-family:Verdana}
+/* #ResultNum2{font-size:150pt;font-family:Verdana} */
+/* #ResultNum3{font-size:150pt;font-family:Verdana}
+#ResultNum4{font-size:150pt;font-family:Verdana} */
+
+
+#Button{margin:50px 0 0 0;}
+#Button input{font-size:70px;padding:0 50px;}
+#btn{background-color:#000000;border:1px solid #000000;width:15%;height:200px;margin:0em auto;font-size:1em;border-radius:2.5px;-moz-border-radius:2.5px;-webkit-border-radius:2.5px;color:rgb(253, 255, 253);}
+
+.mytable{
+	width: 100%;
+	height: 600px;
+	margin:0 auto;
+	}
+
+</style>
+
+<style>
+	.one{
+		width: 20px;
+		height: 200px;
+		margin:0 auto;
+		border: 1px solid #ccc;
+		float: left;
+		box-sizing: border-box;
+	};
+</style>
+
+<!-- <h1 style="color:#ffffff" >抽奖结果</h1> -->
+
+
+<!-- <div id="Result1" style="color:#fbf8f8" class="one">
+	<span id="ResultNum1">0</span>
+</div>
+
+<div id="Result2" style="color:#fbf8f8" class="one">
+	<span id="ResultNum2">0</span>
+</div>
+
+<div id="Result3" style="color:#fbf8f8" class="one">
+	<span id="ResultNum3">0</span>
+</div>
+
+<div id="Result4" style="color:#fbf8f8" class="one">
+	<span id="ResultNum4">0</span>
+</div> -->
+
+<table class="mytable">
+    <tr>
+        <td id="Result1" style="color:#fbf8f8">
+			<span id="ResultNum1">0</span>
+		</td>
+        <td id="Result2" style="color:#fbf8f8">
+			<span id="ResultNum2">0</span>
+		</td>
+    </tr>
+    <tr>
+        <td id="Result3" style="color:#fbf8f8">
+			<span id="ResultNum3">0</span>
+		</td>
+        <td id="Result4" style="color:#fbf8f8">
+			<span id="ResultNum4">0</span>
+		</td>
+    </tr>
+</table>
+
+<div id="Button">
+	<input type='button' id="btn" value='开始 ' onclick='beginRndNum(this)'/>
+</div>
+
+</body>
+</html>
